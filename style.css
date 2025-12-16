@@ -114,3 +114,51 @@ h1 {
     font-style: italic;
     opacity: 0.7;
 }
+
+.global-credits {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.semestre-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+}
+
+.semestre-title {
+    margin-bottom: 0;
+    border-bottom: none;
+    text-align: left;
+}
+
+.semestre-credits {
+    font-size: 0.8em;
+    color: #aaa;
+    text-align: right;
+}
+
+.materia-creditos {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--accent-color);
+    color: var(--card-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.85em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+

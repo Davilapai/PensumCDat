@@ -4,37 +4,43 @@
       "nombre": "Principios de economía",
       "codigo": "001449",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Matemáticas 1",
       "codigo": "032683",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Lógica y matemáticas discretas",
       "codigo": "033518",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Introducción a la programación",
       "codigo": "033698",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Introducción a la ciencia de datos",
       "codigo": "033514",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     },
     {
       "nombre": "Electiva 1",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     }
   ],
   "Semestre 2": [
@@ -42,37 +48,43 @@
       "nombre": "Microeconomía",
       "codigo": "015962",
       "prerequisitos": ["001449", "032683"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Cálculo vectorial",
       "codigo": "001299",
       "prerequisitos": ["032683"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Álgebra lineal",
       "codigo": "001290",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Programación avanzada",
       "codigo": "033699",
       "prerequisitos": ["033698"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Curaduría y gobernanza de datos",
       "codigo": "033515",
       "prerequisitos": ["033514"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     },
     {
       "nombre": "Electiva 2",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     }
   ],
   "Semestre 3": [
@@ -80,31 +92,36 @@
       "nombre": "Macroeconomía",
       "codigo": "001432",
       "prerequisitos": ["015962"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Teoría de probabilidad",
       "codigo": "030890",
       "prerequisitos": ["001299"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Estructura de datos",
       "codigo": "004196",
       "prerequisitos": ["033518", "033699"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Bases de datos",
       "codigo": "033700",
       "prerequisitos": ["033518", "033699"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "4"
     },
     {
       "nombre": "Visualización de datos",
       "codigo": "033704",
       "prerequisitos": ["033514", "033698"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     }
   ],
   "Semestre 4": [
@@ -112,37 +129,43 @@
       "nombre": "Inferencia estadística",
       "codigo": "033519",
       "prerequisitos": ["030890"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Electiva 3",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Principios de desarrollo de software",
       "codigo": "033701",
       "prerequisitos": ["033700"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Introducción a IA",
       "codigo": "004084",
       "prerequisitos": ["004196"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Constitución política",
       "codigo": "001505",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     },
     {
       "nombre": "Electiva 4",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     }
   ],
   "Semestre 5": [
@@ -150,37 +173,43 @@
       "nombre": "Administración",
       "codigo": "001377",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Análisis de regresión",
       "codigo": "033520",
       "prerequisitos": ["033519"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Gestión de proyectos",
       "codigo": "033762",
       "prerequisitos": ["001432"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     },
     {
       "nombre": "Procesamiento de datos a gran escala",
       "codigo": "033702",
       "prerequisitos": ["033700"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Fundamentos de ML",
       "codigo": "033773",
       "prerequisitos": ["004084", "033519"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Teología 1",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     }
   ],
   "Semestre 6": [
@@ -188,37 +217,43 @@
       "nombre": "Organizaciones",
       "codigo": "001382",
       "prerequisitos": ["001377"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Legislación de datos",
       "codigo": "034912",
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Análisis multivariado",
       "codigo": "033521",
       "prerequisitos": ["033519"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Técnicas de ML",
-      "codigo": "033702",
+      "codigo": "033703",
       "prerequisitos": ["004084", "033519"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Introducción a narrativa de datos",
       "codigo": "033573",
       "prerequisitos": ["033704"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Teología 2",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     }
   ],
   "Semestre 7": [
@@ -226,43 +261,50 @@
       "nombre": "Seminario trabajo de grado",
       "codigo": "033523",
       "prerequisitos": ["033521", "033703"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Temas de optimización lineal",
       "codigo": "033305",
       "prerequisitos": ["001290", "033699"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Optimización lineal",
       "codigo": "033746",
       "prerequisitos": ["001290", "032683", "033698"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Complementaria",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Complementaria",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Énfasis 1",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Filosofía 1",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     }
   ],
   "Semestre 8": [
@@ -270,31 +312,36 @@
       "nombre": "Trabajo de grado",
       "codigo": "033522",
       "prerequisitos": ["033523", "034912"],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "6"
     },
     {
       "nombre": "Complementaria",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Énfasis 3",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Énfasis 2",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "3"
     },
     {
       "nombre": "Filosofía 2",
       "codigo": null,
       "prerequisitos": [],
-      "status_checked": false
+      "status_checked": false,
+      "creditos": "2"
     }
   ]
 }
