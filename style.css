@@ -1,0 +1,116 @@
+:root {
+    --bg-color: #1d2e33;
+    --text-color: #e0e0e0;
+    --accent-color: #dfa75d;
+    --card-bg: #263b42;
+    --locked-bg: #152226;
+    --locked-text: #4a5a60;
+    --available-border: #dfa75d;
+    --checked-bg: #2ecc71;
+    --checked-text: #fff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 98%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--accent-color);
+}
+
+#pensum-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    justify-content: center;
+}
+
+@media (min-width: 1200px) {
+    #pensum-container {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+.semestre-column {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 10px;
+    width: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.semestre-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+    color: var(--accent-color);
+}
+
+.materia-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 6px;
+    padding: 10px;
+    cursor: default;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.materia-card.locked {
+    background-color: var(--locked-bg);
+    color: var(--locked-text);
+    border-color: #333;
+    pointer-events: none; /* Prevent clicking */
+}
+
+.materia-card.available {
+    border-left: 5px solid var(--available-border);
+    cursor: pointer;
+}
+
+.materia-card.available:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.materia-card.checked {
+    background-color: var(--checked-bg);
+    color: var(--checked-text);
+    border-color: var(--checked-bg);
+    cursor: pointer;
+}
+
+.materia-name {
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.materia-code {
+    font-size: 0.8em;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+.materia-prereqs {
+    font-size: 0.75em;
+    margin-top: 4px;
+    font-style: italic;
+    opacity: 0.7;
+}
