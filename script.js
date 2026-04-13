@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('pensum-container');
     const creditsCountElement = document.getElementById('credits-count');
+    const addSemesterBtn = document.getElementById('add-semester-btn');
+    const semestersList = document.getElementById('semesters-list');
     let data = {};
+    let addedSemestersCount = 0;
 
     // Cargar el JSON
     fetch('materias.json')
@@ -127,7 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Aplicar clases
-                if (isChecked) {
+                if (materia.locked_in_semester) {
+                    card.classList.add('locked-semester');
+                } else if (isChecked) {
                     card.classList.add('checked');
                 } else if (isLocked) {
                     card.classList.add('locked');
@@ -162,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.appendChild(code);
                 card.appendChild(prereqs);
 
-                if (!isLocked || isChecked) {
+                if (!materia.locked_in_semester && (!isLocked || isChecked)) {
                     card.addEventListener('click', () => {
                         materia.status_checked = !materia.status_checked;
                         
@@ -180,5 +185,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
             container.appendChild(col);
         }
+    }
+
+    if (addSemesterBtn) {
+        function deleteSemestersFrom(startId) {
+            for (const semestre in data) {
+                data[semestre].forEach(materia => {
+                    if (materia.locked_in_semester && materia.locked_in_semester >= startId) {
+                        materia.locked_in_semester = false;
+                        materia.status_checked = false;
+                        if (materia.codigo) {
+                            uncheckDependents(materia.codigo);
+                        }
+                    }
+                });
+            }
+            addedSemestersCount = startId - 1;
+            const blocks = semestersList.querySelectorAll('.semester-block');
+            blocks.forEach(block => {
+                if (parseInt(block.dataset.semId) >= startId) {
+                    block.remove();
+                }
+            });
+            renderPensum();
+        }
+
+        addSemesterBtn.addEventListener('click', () => {
+            const newlyLockedMaterias = [];
+            let currentSemesterCredits = 0;
+
+            // Buscar materias que están marcadas pero no bloqueadas en semestre
+            for (const semestre in data) {
+                data[semestre].forEach(materia => {
+                    if (materia.status_checked && !materia.locked_in_semester) {
+                        materia.locked_in_semester = addedSemestersCount + 1;
+                        currentSemesterCredits += parseInt(materia.creditos || 0);
+                        newlyLockedMaterias.push(materia);
+                    }
+                });
+            }
+
+            if (newlyLockedMaterias.length > 0) {
+                addedSemestersCount++;
+                const currentSemId = addedSemestersCount;
+                
+                // Crear bloque de visualización
+                const block = document.createElement('div');
+                block.className = 'semester-block';
+                block.dataset.semId = currentSemId;
+                
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'semester-block-header';
+
+                const title = document.createElement('h3');
+                title.textContent = `Semestre ${currentSemId} (${currentSemesterCredits} cr)`;
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-semester-btn';
+                deleteBtn.innerHTML = 'Eliminar';
+                deleteBtn.title = 'Eliminar este semestre y los siguientes';
+                deleteBtn.onclick = () => deleteSemestersFrom(currentSemId);
+
+                headerDiv.appendChild(title);
+                headerDiv.appendChild(deleteBtn);
+                block.appendChild(headerDiv);
+
+                const list = document.createElement('ul');
+                newlyLockedMaterias.forEach(m => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${m.codigo || ''} - ${m.nombre}`;
+                    list.appendChild(listItem);
+                });
+                block.appendChild(list);
+
+                semestersList.appendChild(block);
+
+                // Volver a renderizar el grid
+                renderPensum();
+            } else {
+                alert('No has seleccionado materias nuevas para agregar al semestre.');
+            }
+        });
     }
 });
