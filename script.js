@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (materia.prerequisitos && materia.prerequisitos.length > 0) {
                     const prereqsMet = materia.prerequisitos.every(reqCode => {
                         const reqMateria = materiasMap.get(reqCode);
-                        return reqMateria && reqMateria.status_checked;
+                        return reqMateria && reqMateria.locked_in_semester;
                     });
                     if (!prereqsMet) {
                         isLocked = true;
