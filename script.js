@@ -1,28 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('pensum-container');
     const creditsCountElement = document.getElementById('credits-count');
+    const totalCreditsCountElement = document.getElementById('total-credits-count');
     const addSemesterBtn = document.getElementById('add-semester-btn');
     const semestersList = document.getElementById('semesters-list');
+    const careerSelect = document.getElementById('career-select');
+    const pensumTitle = document.getElementById('pensum-title');
     let data = {};
     let addedSemestersCount = 0;
 
-    // Cargar el JSON
-    fetch('materias.json')
-        .then(response => response.json())
-        .then(jsonData => {
-            data = jsonData;
-            renderPensum();
-        })
-        .catch(error => console.error('Error cargando el JSON:', error));
+    // Función para cargar la carrera
+    function loadCareer(filename) {
+        fetch(`carreras/${filename}`)
+            .then(response => response.json())
+            .then(jsonData => {
+                data = jsonData;
+                
+                // Actualizar el título dinámicamente
+                if (pensumTitle && careerSelect) {
+                    pensumTitle.textContent = "Pensum de " + careerSelect.options[careerSelect.selectedIndex].text;
+                }
+                
+                // Limpiar el planificador de semestres
+                addedSemestersCount = 0;
+                if (semestersList) {
+                    semestersList.innerHTML = '';
+                }
+                
+                renderPensum();
+            })
+            .catch(error => console.error('Error cargando el JSON de carrera:', error));
+    }
+
+    // Escuchar el cambio en el selector
+    if (careerSelect) {
+        careerSelect.addEventListener('change', (e) => {
+            loadCareer(e.target.value);
+        });
+    }
+
+    // Cargar la carrera seleccionada por defecto al inicio
+    if (careerSelect) {
+        loadCareer(careerSelect.value);
+    } else {
+        loadCareer('cdat.json');
+    }
 
     function uncheckDependents(code) {
+        const materiasMap = new Map();
         for (const semestre in data) {
             data[semestre].forEach(materia => {
-                if (materia.prerequisitos && materia.prerequisitos.includes(code)) {
-                    if (materia.status_checked) {
-                        materia.status_checked = false;
-                        if (materia.codigo) {
-                            uncheckDependents(materia.codigo);
+                if (materia.codigo) {
+                    materiasMap.set(materia.codigo, materia);
+                }
+            });
+        }
+
+        for (const semestre in data) {
+            data[semestre].forEach(materia => {
+                if (materia.prerequisitos) {
+                    const dependsOnCode = materia.prerequisitos.some(req => {
+                        if (Array.isArray(req)) {
+                            return req.includes(code);
+                        }
+                        return req === code;
+                    });
+
+                    if (dependsOnCode && materia.status_checked) {
+                        const met = materia.prerequisitos.every(req => {
+                            if (Array.isArray(req)) {
+                                return req.some(reqCode => {
+                                    const reqM = materiasMap.get(reqCode);
+                                    return reqM && reqM.status_checked;
+                                });
+                            } else {
+                                const reqM = materiasMap.get(req);
+                                return reqM && reqM.status_checked;
+                            }
+                        });
+
+                        if (!met) {
+                            materia.status_checked = false;
+                            materia.locked_in_semester = false;
+                            if (materia.codigo) {
+                                uncheckDependents(materia.codigo);
+                            }
                         }
                     }
                 }
@@ -33,23 +95,45 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderPensum() {
         container.innerHTML = '';
         let totalCredits = 0;
+        let maxCredits = 0;
         
         // Esto crea las materias segun el codigo y nombree
         const materiasMap = new Map();
+        let hasOpt1Global = false;
+        let hasOpt2Global = false;
+        let optMateriaCredits = 0;
+
         for (const semestre in data) {
             data[semestre].forEach(materia => {
                 if (materia.codigo) {
                     materiasMap.set(materia.codigo, materia);
+                    if (materia.codigo === "033305") {
+                        hasOpt1Global = true;
+                        optMateriaCredits = parseInt(materia.creditos || 0);
+                    }
+                    if (materia.codigo === "033746") {
+                        hasOpt2Global = true;
+                    }
                 }
                 if (materia.status_checked && materia.creditos) {
                     totalCredits += parseInt(materia.creditos);
                 }
+                if (materia.creditos) {
+                    maxCredits += parseInt(materia.creditos);
+                }
             });
+        }
+
+        if (hasOpt1Global && hasOpt2Global) {
+            maxCredits -= optMateriaCredits;
         }
 
         // Actualizar contador global
         if (creditsCountElement) {
             creditsCountElement.textContent = totalCredits;
+        }
+        if (totalCreditsCountElement) {
+            totalCreditsCountElement.textContent = maxCredits;
         }
 
         // Para q salga por semestres
@@ -108,9 +192,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Verificar prerequisitos
                 if (materia.prerequisitos && materia.prerequisitos.length > 0) {
-                    const prereqsMet = materia.prerequisitos.every(reqCode => {
-                        const reqMateria = materiasMap.get(reqCode);
-                        return reqMateria && reqMateria.locked_in_semester;
+                    const prereqsMet = materia.prerequisitos.every(req => {
+                        if (Array.isArray(req)) {
+                            return req.some(reqCode => {
+                                const reqMateria = materiasMap.get(reqCode);
+                                return reqMateria && reqMateria.locked_in_semester;
+                            });
+                        } else {
+                            const reqMateria = materiasMap.get(req);
+                            return reqMateria && reqMateria.locked_in_semester;
+                        }
                     });
                     if (!prereqsMet) {
                         isLocked = true;
@@ -160,7 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prereqs = document.createElement('div');
                 prereqs.className = 'materia-prereqs';
                 if (materia.prerequisitos && materia.prerequisitos.length > 0) {
-                    prereqs.textContent = 'Prereq: ' + materia.prerequisitos.join(', ');
+                    const formattedPrereqs = materia.prerequisitos.map(req => {
+                        if (Array.isArray(req)) {
+                            return req.join(' ó ');
+                        }
+                        return req;
+                    }).join(', ');
+                    prereqs.textContent = 'Prereq: ' + formattedPrereqs;
                 }
 
                 card.appendChild(name);

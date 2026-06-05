@@ -1,0 +1,298 @@
+{
+  "Semestre 1": [
+    {
+      "nombre": "Cálculo Diferencial",
+      "codigo": "001295",
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Fundamentos de matemáticas 1",
+      "codigo": "001079",
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Expresión oral y escrita",
+      "codigo": "008164",
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Teología",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    },
+    {
+      "nombre": "Introducción a la programación",
+      "codigo": "033698",
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    }
+  ],
+  "Semestre 2": [
+    {
+      "nombre": "Cálculo Integral",
+      "codigo": "001297",
+      "prerequisitos": ["001295"],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Fundamentos de matemáticas 2",
+      "codigo": "015818",
+      "prerequisitos": ["001079"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Álgebra lineal",
+      "codigo": "001290",
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Filosofía",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    },
+    {
+      "nombre": "Programación avanzada",
+      "codigo": "033699",
+      "prerequisitos": ["033698"],
+      "status_checked": false,
+      "creditos": "3"
+    }
+  ],
+  "Semestre 3": [
+    {
+      "nombre": "Cálculo vectorial",
+      "codigo": "001299",
+      "prerequisitos": ["001297"],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Álgebra lineal 2",
+      "codigo": "017606",
+      "prerequisitos": ["015818", "001290"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Ecuaciones diferenciales",
+      "codigo": "001300",
+      "prerequisitos": ["001297", "001290"],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Física mecánica",
+      "codigo": "001340",
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Electiva",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    }
+  ],
+  "Semestre 4": [
+    {
+      "nombre": "Análisis matemático 1",
+      "codigo": "001074",
+      "prerequisitos": ["001297", "015818"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Álgebra abstracta 1",
+      "codigo": "001200",
+      "prerequisitos": ["017606"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Teoría de la probabilidad",
+      "codigo": "030890",
+      "prerequisitos": [["001299", "001300"]],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Electricidad y magnetismo",
+      "codigo": "001339",
+      "prerequisitos": ["001340", "001297"],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Filosofía 2",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    }
+  ],
+  "Semestre 5": [
+    {
+      "nombre": "Análisis matemático 2",
+      "codigo": "001075",
+      "prerequisitos": ["001074", "001290"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Álgebra abstracta 2",
+      "codigo": "037349",
+      "prerequisitos": ["001200"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Geometría diferencial",
+      "codigo": "001077",
+      "prerequisitos": ["001074", "001290"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Electiva",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    },
+    {
+      "nombre": "Constitución política",
+      "codigo": "001505",
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    }
+  ],
+  "Semestre 6": [
+    {
+      "nombre": "Análisis complejo",
+      "codigo": "024093",
+      "prerequisitos": ["001074"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Topología",
+      "codigo": "001205",
+      "prerequisitos": ["001074"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Inferencia estadística",
+      "codigo": "033519",
+      "prerequisitos": ["030890"],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Análisis numérico",
+      "codigo": "001291",
+      "prerequisitos": ["001300"],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Electiva",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    }
+  ],
+  "Semestre 7": [
+    {
+      "nombre": "Énfasis 1",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Iniciación científica",
+      "codigo": "037350",
+      "prerequisitos": ["001205"],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Complementaria 1",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Complementaria 2",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Electiva",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    }
+  ],
+  "Semestre 8": [
+    {
+      "nombre": "Énfasis 2",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Énfasis 3",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "4"
+    },
+    {
+      "nombre": "Complementaria 3",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "3"
+    },
+    {
+      "nombre": "Electiva",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    },
+    {
+      "nombre": "Teología 2",
+      "codigo": null,
+      "prerequisitos": [],
+      "status_checked": false,
+      "creditos": "2"
+    }
+  ]
+}

@@ -8,9 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Pensum de Ciencia de Datos</h1>
+        <div class="header-bar">
+            <h1 id="pensum-title">Pensum Interactivo</h1>
+            <div class="selector-container">
+                <label for="career-select" class="selector-label">Selecciona tu Carrera:</label>
+                <div class="career-select-wrapper">
+                    <select id="career-select" class="career-dropdown">
+                        <option value="cdat.json">Ciencia de Datos</option>
+                        <option value="matem.json">Matemáticas</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div id="global-credits" class="global-credits">
-            Créditos cursados: <span id="credits-count">0</span> / 134
+            Créditos cursados: <span id="credits-count">0</span> / <span id="total-credits-count">0</span>
         </div>
         <div id="pensum-container"></div>
         
