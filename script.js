@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // CARGA DE CARRERA
     // ==========================================
     function loadCareer(filename) {
-        fetch(`carreras/${filename}`)
+        fetch(`carreras/${filename}?v=${Date.now()}`)
             .then(response => response.json())
             .then(jsonData => {
                 // Actualizar el título
@@ -328,8 +328,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const lockedCodes = new Set();
         dobleMaterias.forEach(m => {
             if (m.locked_in_semester) {
-                if (m.selected_variante) lockedCodes.add(m.selected_variante);
-                else if (m.codigo) lockedCodes.add(m.codigo);
+                if (m.id === 'CD_001079') {
+                    // Fundamentos 1 homologa 100% con Lógica y discretas
+                    lockedCodes.add('001079');
+                    lockedCodes.add('033518');
+                } else if (m.selected_variante === '032683') {
+                    // Matemáticas 1 homologa Cálculo Diferencial (001295) y abre Vectorial
+                    lockedCodes.add('032683');
+                    lockedCodes.add('001295');
+                } else if (m.selected_variante) {
+                    lockedCodes.add(m.selected_variante);
+                } else if (m.codigo) {
+                    lockedCodes.add(m.codigo);
+                }
                 if (m.codigos_homologados && !m.variantes) {
                     m.codigos_homologados.forEach(c => lockedCodes.add(c));
                 }
