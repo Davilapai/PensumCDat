@@ -249,13 +249,17 @@
     },
     {
       "id": "CD_001079",
-      "nombre": "Fundamentos de matemáticas 1",
+      "nombre": "Lógica y matemáticas discretas / Fundamentos 1",
       "codigo": "001079",
       "creditos": "4",
       "prerequisitos": [],
-      "origen": "matem",
+      "origen": "ambas",
       "status_checked": false,
-      "locked_in_semester": false
+      "locked_in_semester": false,
+      "codigos_homologados": [
+        "001079",
+        "033518"
+      ]
     },
     {
       "id": "CD_008164",
@@ -443,16 +447,6 @@
       "id": "CD_001449",
       "nombre": "Principios de economía",
       "codigo": "001449",
-      "creditos": "3",
-      "prerequisitos": [],
-      "origen": "cdat",
-      "status_checked": false,
-      "locked_in_semester": false
-    },
-    {
-      "id": "CD_033518",
-      "nombre": "Lógica y matemáticas discretas",
-      "codigo": "033518",
       "creditos": "3",
       "prerequisitos": [],
       "origen": "cdat",
