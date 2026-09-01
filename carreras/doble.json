@@ -307,7 +307,10 @@
       "codigo": "015818",
       "creditos": "4",
       "prerequisitos": [
-        "001079"
+        [
+          "001079",
+          "033518"
+        ]
       ],
       "origen": "matem",
       "status_checked": false,
