@@ -1033,4 +1033,41 @@ h1 {
     padding: 30px 10px;
 }
 
+/* --- Selector de Variantes (Homologaciones) --- */
+.variant-selector {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.variant-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    border-radius: 4px;
+    padding: 5px 6px;
+    font-size: 0.72em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-family: inherit;
+}
+
+.variant-btn:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.variant-btn.active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+    font-weight: 700;
+}
+
 

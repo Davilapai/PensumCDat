@@ -12,7 +12,19 @@
       "prerequisitos": [],
       "origen": "ambas",
       "status_checked": false,
-      "locked_in_semester": false
+      "locked_in_semester": false,
+      "variantes": [
+        {
+          "nombre": "Matemáticas 1",
+          "codigo": "032683",
+          "creditos": "3"
+        },
+        {
+          "nombre": "Cálculo Diferencial",
+          "codigo": "001295",
+          "creditos": "3"
+        }
+      ]
     },
     {
       "id": "CD_001297",
@@ -20,7 +32,10 @@
       "codigo": "001297",
       "creditos": "3",
       "prerequisitos": [
-        "001295"
+        [
+          "001295",
+          "032683"
+        ]
       ],
       "origen": "matem",
       "status_checked": false,
@@ -64,7 +79,10 @@
       "codigo": "001299",
       "creditos": "3",
       "prerequisitos": [
-        "001297"
+        [
+          "001297",
+          "032683"
+        ]
       ],
       "origen": "ambas",
       "status_checked": false,
@@ -259,6 +277,18 @@
       "codigos_homologados": [
         "001079",
         "033518"
+      ],
+      "variantes": [
+        {
+          "nombre": "Fundamentos de matemáticas 1",
+          "codigo": "001079",
+          "creditos": "4"
+        },
+        {
+          "nombre": "Lógica y matemáticas discretas",
+          "codigo": "033518",
+          "creditos": "3"
+        }
       ]
     },
     {
@@ -470,7 +500,10 @@
       "creditos": "3",
       "prerequisitos": [
         "001449",
-        "001295"
+        [
+          "001295",
+          "032683"
+        ]
       ],
       "origen": "cdat",
       "status_checked": false,
@@ -506,7 +539,10 @@
       "codigo": "004196",
       "creditos": "3",
       "prerequisitos": [
-        "033518",
+        [
+          "033518",
+          "001079"
+        ],
         "033699"
       ],
       "origen": "cdat",
@@ -519,7 +555,10 @@
       "codigo": "033700",
       "creditos": "4",
       "prerequisitos": [
-        "033518",
+        [
+          "033518",
+          "001079"
+        ],
         "033699"
       ],
       "origen": "cdat",
@@ -714,7 +753,10 @@
       "creditos": "3",
       "prerequisitos": [
         "001290",
-        "001295",
+        [
+          "001295",
+          "032683"
+        ],
         "033698"
       ],
       "origen": "cdat",

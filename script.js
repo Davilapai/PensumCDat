@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const rawList = jsonData['Doble Carrera'] || [];
                     dobleMaterias = rawList.map(m => ({
                         ...m,
+                        selected_variante: m.variantes ? m.variantes[0].codigo : (m.codigo || null),
                         status_checked: false,
                         locked_in_semester: false
                     }));
@@ -418,8 +419,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const lockedCodes = new Set();
         dobleMaterias.forEach(m => {
             if (m.locked_in_semester) {
-                if (m.codigo) lockedCodes.add(m.codigo);
-                if (m.codigos_homologados && Array.isArray(m.codigos_homologados)) {
+                if (m.selected_variante) {
+                    lockedCodes.add(m.selected_variante);
+                } else if (m.codigo) {
+                    lockedCodes.add(m.codigo);
+                }
+                if (m.codigos_homologados && Array.isArray(m.codigos_homologados) && !m.variantes) {
                     m.codigos_homologados.forEach(c => lockedCodes.add(c));
                 }
             }
@@ -589,7 +594,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const chipName = document.createElement('span');
                 chipName.className = 'chip-name';
-                chipName.textContent = m.nombre;
+                const vObj = m.variantes ? m.variantes.find(v => v.codigo === m.selected_variante) : null;
+                chipName.textContent = vObj ? vObj.nombre : m.nombre;
 
                 const chipMeta = document.createElement('span');
                 chipMeta.className = 'chip-meta';
@@ -640,7 +646,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const chipName = document.createElement('span');
                     chipName.className = 'active-chip-name';
-                    chipName.textContent = m.nombre;
+                    const vObj = m.variantes ? m.variantes.find(v => v.codigo === m.selected_variante) : null;
+                    chipName.textContent = vObj ? vObj.nombre : m.nombre;
 
                     const chipCr = document.createElement('span');
                     chipCr.className = 'active-chip-cr';
@@ -734,6 +741,26 @@ document.addEventListener('DOMContentLoaded', () => {
             nameEl.className = 'pool-card-title';
             nameEl.textContent = materia.nombre;
             card.appendChild(nameEl);
+
+            if (materia.variantes && materia.variantes.length > 1) {
+                const variantContainer = document.createElement('div');
+                variantContainer.className = 'variant-selector';
+
+                materia.variantes.forEach(v => {
+                    const btn = document.createElement('button');
+                    btn.className = `variant-btn ${materia.selected_variante === v.codigo ? 'active' : ''}`;
+                    btn.textContent = `${v.nombre}`;
+                    btn.title = `Cursar como ${v.nombre} (${v.codigo})`;
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        materia.selected_variante = v.codigo;
+                        materia.creditos = v.creditos;
+                        renderDobleCarrera();
+                    });
+                    variantContainer.appendChild(btn);
+                });
+                card.appendChild(variantContainer);
+            }
 
             if (isAvailable) {
                 disponiblesCount++;
