@@ -440,15 +440,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const someMet = req.some(code => lockedCodes.has(code));
                 if (!someMet) {
                     const names = req.map(code => {
-                        const found = dobleMaterias.find(m => m.codigo === code);
-                        return found ? `${found.nombre} (${code})` : code;
+                        const found = dobleMaterias.find(m => m.codigo === code || (m.codigos_homologados && m.codigos_homologados.includes(code)));
+                        const codeLabel = found && found.codigos_homologados && found.codigos_homologados.length > 1 ? found.codigos_homologados.join(' / ') : code;
+                        return found ? `${found.nombre} (${codeLabel})` : code;
                     }).join(' ó ');
                     missingPrereqs.push(names);
                 }
             } else {
                 if (!lockedCodes.has(req)) {
-                    const found = dobleMaterias.find(m => m.codigo === req);
-                    missingPrereqs.push(found ? `${found.nombre} (${req})` : req);
+                    const found = dobleMaterias.find(m => m.codigo === req || (m.codigos_homologados && m.codigos_homologados.includes(req)));
+                    const codeLabel = found && found.codigos_homologados && found.codigos_homologados.length > 1 ? found.codigos_homologados.join(' / ') : req;
+                    missingPrereqs.push(found ? `${found.nombre} (${codeLabel})` : req);
                 }
             }
         });

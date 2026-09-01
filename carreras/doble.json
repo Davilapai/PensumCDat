@@ -2,7 +2,7 @@
   "Doble Carrera": [
     {
       "id": "CD_001295",
-      "nombre": "Matemáticas 1 / Cálculo Diferencial",
+      "nombre": "Cálculo Diferencial / Matemáticas 1",
       "codigo": "001295",
       "codigos_homologados": [
         "001295",
@@ -249,7 +249,7 @@
     },
     {
       "id": "CD_001079",
-      "nombre": "Lógica y matemáticas discretas / Fundamentos 1",
+      "nombre": "Fundamentos de matemáticas 1 / Lógica y matemáticas discretas",
       "codigo": "001079",
       "creditos": "4",
       "prerequisitos": [],
