@@ -417,8 +417,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function getLockedCodesMap() {
         const lockedCodes = new Set();
         dobleMaterias.forEach(m => {
-            if (m.locked_in_semester && m.codigo) {
-                lockedCodes.add(m.codigo);
+            if (m.locked_in_semester) {
+                if (m.codigo) lockedCodes.add(m.codigo);
+                if (m.codigos_homologados && Array.isArray(m.codigos_homologados)) {
+                    m.codigos_homologados.forEach(c => lockedCodes.add(c));
+                }
             }
         });
         return lockedCodes;
@@ -480,14 +483,31 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Calcular totales globales
         let totalPlanCredits = 0;
         let totalCompletedMaterias = 0;
-        const maxDobleCredits = 214;
+        let maxDobleCredits = 0;
+        let hasOpt1Global = false;
+        let hasOpt2Global = false;
+        let optMateriaCredits = 0;
 
         dobleMaterias.forEach(m => {
+            const creds = parseInt(m.creditos || 0);
+            maxDobleCredits += creds;
+            if (m.codigo === '033305') {
+                hasOpt1Global = true;
+                optMateriaCredits = creds;
+            }
+            if (m.codigo === '033746') {
+                hasOpt2Global = true;
+            }
             if (m.locked_in_semester) {
-                totalPlanCredits += parseInt(m.creditos || 0);
+                totalPlanCredits += creds;
                 totalCompletedMaterias++;
             }
         });
+
+        if (hasOpt1Global && hasOpt2Global) {
+            maxDobleCredits -= optMateriaCredits;
+        }
+        const maxTotalMaterias = hasOpt1Global && hasOpt2Global ? dobleMaterias.length - 1 : dobleMaterias.length;
 
         let activeCajitaCredits = 0;
         const activeSelectedMaterias = [];
@@ -509,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
             materiasCheckedCount.textContent = totalCompletedMaterias + activeSelectedIds.size;
         }
         if (materiasTotalCount) {
-            materiasTotalCount.textContent = 68;
+            materiasTotalCount.textContent = maxTotalMaterias;
         }
 
         // 2. Renderizar Cajitas Terminadas
@@ -695,7 +715,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tagOrigen.textContent = materia.origen === 'cdat' ? 'Ciencia de Datos' : (materia.origen === 'matem' ? 'Matemáticas' : 'Compartida');
             topMeta.appendChild(tagOrigen);
 
-            if (materia.codigo) {
+            if (materia.codigos_homologados && materia.codigos_homologados.length > 1) {
+                const codeBadge = document.createElement('span');
+                codeBadge.className = 'pool-card-code';
+                codeBadge.textContent = materia.codigos_homologados.join(' / ');
+                topMeta.appendChild(codeBadge);
+            } else if (materia.codigo) {
                 const codeBadge = document.createElement('span');
                 codeBadge.className = 'pool-card-code';
                 codeBadge.textContent = materia.codigo;

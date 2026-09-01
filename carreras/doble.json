@@ -2,12 +2,15 @@
   "Doble Carrera": [
     {
       "id": "CD_001295",
-      "nombre": "Cálculo Diferencial",
+      "nombre": "Matemáticas 1 / Cálculo Diferencial",
       "codigo": "001295",
+      "codigos_homologados": [
+        "001295",
+        "032683"
+      ],
       "creditos": "3",
       "prerequisitos": [],
       "origen": "ambas",
-      "nota": "Homologa Matemáticas 1 (032683)",
       "status_checked": false,
       "locked_in_semester": false
     },
@@ -205,92 +208,42 @@
       "locked_in_semester": false
     },
     {
-      "id": "CD_ELEC_CDAT_1",
-      "nombre": "Electiva 1 (Ciencia de Datos)",
+      "id": "CD_ELEC_1",
+      "nombre": "Electiva 1",
       "codigo": null,
       "creditos": "3",
       "prerequisitos": [],
-      "origen": "cdat",
+      "origen": "ambas",
       "status_checked": false,
       "locked_in_semester": false
     },
     {
-      "id": "CD_ELEC_CDAT_2",
-      "nombre": "Electiva 2 (Ciencia de Datos)",
+      "id": "CD_ELEC_2",
+      "nombre": "Electiva 2",
       "codigo": null,
       "creditos": "3",
       "prerequisitos": [],
-      "origen": "cdat",
+      "origen": "ambas",
       "status_checked": false,
       "locked_in_semester": false
     },
     {
-      "id": "CD_ELEC_CDAT_3",
-      "nombre": "Electiva 3 (Ciencia de Datos)",
+      "id": "CD_ELEC_3",
+      "nombre": "Electiva 3",
       "codigo": null,
       "creditos": "3",
       "prerequisitos": [],
-      "origen": "cdat",
+      "origen": "ambas",
       "status_checked": false,
       "locked_in_semester": false
     },
     {
-      "id": "CD_ELEC_CDAT_4",
-      "nombre": "Electiva 4 (Ciencia de Datos)",
+      "id": "CD_ELEC_4",
+      "nombre": "Electiva 4",
       "codigo": null,
       "creditos": "3",
       "prerequisitos": [],
-      "origen": "cdat",
-      "status_checked": false,
-      "locked_in_semester": false
-    },
-    {
-      "id": "CD_ELEC_MAT_1",
-      "nombre": "Electiva 1 (Matemáticas)",
-      "codigo": null,
-      "creditos": "3",
-      "prerequisitos": [],
-      "origen": "matem",
-      "status_checked": false,
-      "locked_in_semester": false
-    },
-    {
-      "id": "CD_ELEC_MAT_2",
-      "nombre": "Electiva 2 (Matemáticas)",
-      "codigo": null,
-      "creditos": "3",
-      "prerequisitos": [],
-      "origen": "matem",
-      "status_checked": false,
-      "locked_in_semester": false
-    },
-    {
-      "id": "CD_ELEC_MAT_3",
-      "nombre": "Electiva 3 (Matemáticas)",
-      "codigo": null,
-      "creditos": "3",
-      "prerequisitos": [],
-      "origen": "matem",
-      "status_checked": false,
-      "locked_in_semester": false
-    },
-    {
-      "id": "CD_ELEC_MAT_4",
-      "nombre": "Electiva 4 (Matemáticas)",
-      "codigo": null,
-      "creditos": "3",
-      "prerequisitos": [],
-      "origen": "matem",
-      "status_checked": false,
-      "locked_in_semester": false
-    },
-    {
-      "id": "CD_ELEC_MAT_5",
-      "nombre": "Electiva 5 (Matemáticas)",
-      "codigo": null,
-      "creditos": "3",
-      "prerequisitos": [],
-      "origen": "matem",
+      "origen": "ambas",
       "status_checked": false,
       "locked_in_semester": false
     },
