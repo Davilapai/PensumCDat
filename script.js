@@ -114,49 +114,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // MODO ESTÁNDAR (CIENCIA DE DATOS / MATEMÁTICAS)
     // ==========================================
     function uncheckDependentsStandard(code) {
-        const materiasMap = new Map();
-        for (const semestre in standardData) {
-            standardData[semestre].forEach(materia => {
-                if (materia.codigo) {
-                    materiasMap.set(materia.codigo, materia);
+        const allMaterias = Object.values(standardData).flat();
+        const materiasMap = new Map(allMaterias.filter(m => m.codigo).map(m => [m.codigo, m]));
+
+        allMaterias.forEach(materia => {
+            if (!materia.prerequisitos || !materia.status_checked) return;
+
+            const depends = materia.prerequisitos.some(req => 
+                Array.isArray(req) ? req.includes(code) : req === code
+            );
+
+            if (depends) {
+                const met = materia.prerequisitos.every(req => 
+                    Array.isArray(req) 
+                        ? req.some(c => materiasMap.get(c)?.status_checked)
+                        : materiasMap.get(req)?.status_checked
+                );
+
+                if (!met) {
+                    materia.status_checked = false;
+                    materia.locked_in_semester = false;
+                    if (materia.codigo) uncheckDependentsStandard(materia.codigo);
                 }
-            });
-        }
-
-        for (const semestre in standardData) {
-            standardData[semestre].forEach(materia => {
-                if (materia.prerequisitos) {
-                    const dependsOnCode = materia.prerequisitos.some(req => {
-                        if (Array.isArray(req)) {
-                            return req.includes(code);
-                        }
-                        return req === code;
-                    });
-
-                    if (dependsOnCode && materia.status_checked) {
-                        const met = materia.prerequisitos.every(req => {
-                            if (Array.isArray(req)) {
-                                return req.some(reqCode => {
-                                    const reqM = materiasMap.get(reqCode);
-                                    return reqM && reqM.status_checked;
-                                });
-                            } else {
-                                const reqM = materiasMap.get(req);
-                                return reqM && reqM.status_checked;
-                            }
-                        });
-
-                        if (!met) {
-                            materia.status_checked = false;
-                            materia.locked_in_semester = false;
-                            if (materia.codigo) {
-                                uncheckDependentsStandard(materia.codigo);
-                            }
-                        }
-                    }
-                }
-            });
-        }
+            }
+        });
     }
 
     function renderStandardPensum() {
@@ -164,31 +145,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalCredits = 0;
         let maxCredits = 0;
 
-        const materiasMap = new Map();
-        let hasOpt1Global = false;
-        let hasOpt2Global = false;
-        let optMateriaCredits = 0;
+        const allMaterias = Object.values(standardData).flat();
+        const materiasMap = new Map(allMaterias.filter(m => m.codigo).map(m => [m.codigo, m]));
+        const hasOpt1Global = materiasMap.has("033305");
+        const hasOpt2Global = materiasMap.has("033746");
+        const optMateriaCredits = parseInt(materiasMap.get("033305")?.creditos || 0);
 
-        for (const semestre in standardData) {
-            standardData[semestre].forEach(materia => {
-                if (materia.codigo) {
-                    materiasMap.set(materia.codigo, materia);
-                    if (materia.codigo === "033305") {
-                        hasOpt1Global = true;
-                        optMateriaCredits = parseInt(materia.creditos || 0);
-                    }
-                    if (materia.codigo === "033746") {
-                        hasOpt2Global = true;
-                    }
-                }
-                if (materia.status_checked && materia.creditos) {
-                    totalCredits += parseInt(materia.creditos);
-                }
-                if (materia.creditos) {
-                    maxCredits += parseInt(materia.creditos);
-                }
-            });
-        }
+        allMaterias.forEach(m => {
+            const creds = parseInt(m.creditos || 0);
+            if (m.status_checked) totalCredits += creds;
+            maxCredits += creds;
+        });
 
         if (hasOpt1Global && hasOpt2Global) {
             maxCredits -= optMateriaCredits;
@@ -208,35 +175,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const hasOpt2 = materias.some(m => m.codigo === "033746");
 
             materias.forEach(m => {
-                if (m.creditos) {
-                    const creds = parseInt(m.creditos);
-                    semestreTotalCredits += creds;
-                    if (m.status_checked) {
-                        semestreCheckedCredits += creds;
-                    }
-                }
+                const creds = parseInt(m.creditos || 0);
+                semestreTotalCredits += creds;
+                if (m.status_checked) semestreCheckedCredits += creds;
             });
 
             if (hasOpt1 && hasOpt2) {
-                const optMateria = materias.find(m => m.codigo === "033305");
-                if (optMateria && optMateria.creditos) {
-                    semestreTotalCredits -= parseInt(optMateria.creditos);
-                }
+                semestreTotalCredits -= parseInt(materias.find(m => m.codigo === "033305")?.creditos || 0);
             }
 
             const header = document.createElement('div');
             header.className = 'semestre-header';
-
-            const title = document.createElement('div');
-            title.className = 'semestre-title';
-            title.textContent = semestreNombre;
-
-            const creditsInfo = document.createElement('div');
-            creditsInfo.className = 'semestre-credits';
-            creditsInfo.textContent = `${semestreCheckedCredits} / ${semestreTotalCredits} cr`;
-
-            header.appendChild(title);
-            header.appendChild(creditsInfo);
+            header.innerHTML = `
+                <div class="semestre-title">${semestreNombre}</div>
+                <div class="semestre-credits">${semestreCheckedCredits} / ${semestreTotalCredits} cr</div>
+            `;
             col.appendChild(header);
 
             materias.forEach(materia => {
@@ -246,81 +199,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isChecked = materia.status_checked;
                 let isLocked = false;
 
-                if (materia.prerequisitos && materia.prerequisitos.length > 0) {
-                    const prereqsMet = materia.prerequisitos.every(req => {
-                        if (Array.isArray(req)) {
-                            return req.some(reqCode => {
-                                const reqMateria = materiasMap.get(reqCode);
-                                return reqMateria && reqMateria.locked_in_semester;
-                            });
-                        } else {
-                            const reqMateria = materiasMap.get(req);
-                            return reqMateria && reqMateria.locked_in_semester;
-                        }
-                    });
-                    if (!prereqsMet) {
-                        isLocked = true;
-                    }
+                if (materia.prerequisitos?.length) {
+                    const prereqsMet = materia.prerequisitos.every(req => 
+                        Array.isArray(req)
+                            ? req.some(c => materiasMap.get(c)?.locked_in_semester)
+                            : materiasMap.get(req)?.locked_in_semester
+                    );
+                    if (!prereqsMet) isLocked = true;
                 }
 
                 if (!isChecked) {
-                    if (materia.codigo === "033305" && materiasMap.get("033746")?.status_checked) {
-                        isLocked = true;
-                    }
-                    if (materia.codigo === "033746" && materiasMap.get("033305")?.status_checked) {
-                        isLocked = true;
-                    }
+                    if (materia.codigo === "033305" && materiasMap.get("033746")?.status_checked) isLocked = true;
+                    if (materia.codigo === "033746" && materiasMap.get("033305")?.status_checked) isLocked = true;
                 }
 
-                if (materia.locked_in_semester) {
-                    card.classList.add('locked-semester');
-                } else if (isChecked) {
-                    card.classList.add('checked');
-                } else if (isLocked) {
-                    card.classList.add('locked');
-                } else {
-                    card.classList.add('available');
-                }
+                if (materia.locked_in_semester) card.classList.add('locked-semester');
+                else if (isChecked) card.classList.add('checked');
+                else if (isLocked) card.classList.add('locked');
+                else card.classList.add('available');
 
-                if (materia.creditos) {
-                    const creditosBadge = document.createElement('div');
-                    creditosBadge.className = 'materia-creditos';
-                    creditosBadge.textContent = materia.creditos;
-                    card.appendChild(creditosBadge);
-                }
+                const formattedPrereqs = materia.prerequisitos?.length
+                    ? 'Prereq: ' + materia.prerequisitos.map(r => Array.isArray(r) ? r.join(' ó ') : r).join(', ')
+                    : '';
 
-                const name = document.createElement('div');
-                name.className = 'materia-name';
-                name.textContent = materia.nombre;
-
-                const code = document.createElement('div');
-                code.className = 'materia-code';
-                code.textContent = materia.codigo || '';
-
-                const prereqs = document.createElement('div');
-                prereqs.className = 'materia-prereqs';
-                if (materia.prerequisitos && materia.prerequisitos.length > 0) {
-                    const formattedPrereqs = materia.prerequisitos.map(req => {
-                        if (Array.isArray(req)) {
-                            return req.join(' ó ');
-                        }
-                        return req;
-                    }).join(', ');
-                    prereqs.textContent = 'Prereq: ' + formattedPrereqs;
-                }
-
-                card.appendChild(name);
-                card.appendChild(code);
-                card.appendChild(prereqs);
+                card.innerHTML = `
+                    ${materia.creditos ? `<div class="materia-creditos">${materia.creditos}</div>` : ''}
+                    <div class="materia-name">${materia.nombre}</div>
+                    <div class="materia-code">${materia.codigo || ''}</div>
+                    ${formattedPrereqs ? `<div class="materia-prereqs">${formattedPrereqs}</div>` : ''}
+                `;
 
                 if (!materia.locked_in_semester && (!isLocked || isChecked)) {
                     card.addEventListener('click', () => {
                         materia.status_checked = !materia.status_checked;
-
                         if (!materia.status_checked && materia.codigo) {
                             uncheckDependentsStandard(materia.codigo);
                         }
-
                         renderStandardPensum();
                     });
                 }
@@ -335,23 +249,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Planificador estándar
     if (addSemesterBtn) {
         function deleteSemestersFromStandard(startId) {
-            for (const semestre in standardData) {
-                standardData[semestre].forEach(materia => {
-                    if (materia.locked_in_semester && materia.locked_in_semester >= startId) {
-                        materia.locked_in_semester = false;
-                        materia.status_checked = false;
-                        if (materia.codigo) {
-                            uncheckDependentsStandard(materia.codigo);
-                        }
-                    }
-                });
-            }
-            addedSemestersCount = startId - 1;
-            const blocks = semestersList.querySelectorAll('.semester-block');
-            blocks.forEach(block => {
-                if (parseInt(block.dataset.semId) >= startId) {
-                    block.remove();
+            Object.values(standardData).flat().forEach(materia => {
+                if (materia.locked_in_semester && materia.locked_in_semester >= startId) {
+                    materia.locked_in_semester = false;
+                    materia.status_checked = false;
+                    if (materia.codigo) uncheckDependentsStandard(materia.codigo);
                 }
+            });
+            addedSemestersCount = startId - 1;
+            semestersList.querySelectorAll('.semester-block').forEach(block => {
+                if (parseInt(block.dataset.semId) >= startId) block.remove();
             });
             renderStandardPensum();
         }
@@ -360,15 +267,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const newlyLockedMaterias = [];
             let currentSemesterCredits = 0;
 
-            for (const semestre in standardData) {
-                standardData[semestre].forEach(materia => {
-                    if (materia.status_checked && !materia.locked_in_semester) {
-                        materia.locked_in_semester = addedSemestersCount + 1;
-                        currentSemesterCredits += parseInt(materia.creditos || 0);
-                        newlyLockedMaterias.push(materia);
-                    }
-                });
-            }
+            Object.values(standardData).flat().forEach(materia => {
+                if (materia.status_checked && !materia.locked_in_semester) {
+                    materia.locked_in_semester = addedSemestersCount + 1;
+                    currentSemesterCredits += parseInt(materia.creditos || 0);
+                    newlyLockedMaterias.push(materia);
+                }
+            });
 
             if (newlyLockedMaterias.length > 0) {
                 addedSemestersCount++;
@@ -380,18 +285,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const headerDiv = document.createElement('div');
                 headerDiv.className = 'semester-block-header';
-
-                const title = document.createElement('h3');
-                title.textContent = `Semestre ${currentSemId} (${currentSemesterCredits} cr)`;
-
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'delete-semester-btn';
-                deleteBtn.innerHTML = 'Eliminar';
-                deleteBtn.title = 'Eliminar este semestre y los siguientes';
-                deleteBtn.onclick = () => deleteSemestersFromStandard(currentSemId);
-
-                headerDiv.appendChild(title);
-                headerDiv.appendChild(deleteBtn);
+                headerDiv.innerHTML = `
+                    <h3>Semestre ${currentSemId} (${currentSemesterCredits} cr)</h3>
+                    <button class="delete-semester-btn" title="Eliminar este semestre y los siguientes">Eliminar</button>
+                `;
+                headerDiv.querySelector('.delete-semester-btn').onclick = () => deleteSemestersFromStandard(currentSemId);
                 block.appendChild(headerDiv);
 
                 const list = document.createElement('ul');
@@ -414,17 +312,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // MODO DOBLE CARRERA (CAJITAS Y POOL)
     // ==========================================
 
+    const getMateriaName = m => {
+        const v = m.variantes?.find(x => x.codigo === m.selected_variante);
+        return v ? v.nombre : m.nombre;
+    };
+
+    const getPrereqLabel = code => {
+        const f = dobleMaterias.find(m => m.codigo === code || m.codigos_homologados?.includes(code));
+        const lbl = f?.codigos_homologados?.length > 1 ? f.codigos_homologados.join(' / ') : code;
+        return f ? `${f.nombre} (${lbl})` : code;
+    };
+
     // Obtener mapa de códigos de materias cursadas en semestres cerrados
     function getLockedCodesMap() {
         const lockedCodes = new Set();
         dobleMaterias.forEach(m => {
             if (m.locked_in_semester) {
-                if (m.selected_variante) {
-                    lockedCodes.add(m.selected_variante);
-                } else if (m.codigo) {
-                    lockedCodes.add(m.codigo);
-                }
-                if (m.codigos_homologados && Array.isArray(m.codigos_homologados) && !m.variantes) {
+                if (m.selected_variante) lockedCodes.add(m.selected_variante);
+                else if (m.codigo) lockedCodes.add(m.codigo);
+                if (m.codigos_homologados && !m.variantes) {
                     m.codigos_homologados.forEach(c => lockedCodes.add(c));
                 }
             }
@@ -434,49 +340,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Verificar si una materia cumple prerequisitos
     function checkPrerequisitesMet(materia, lockedCodes) {
-        if (!materia.prerequisitos || materia.prerequisitos.length === 0) {
-            return { isMet: true, missingPrereqs: [] };
-        }
-
+        if (!materia.prerequisitos?.length) return { isMet: true, missingPrereqs: [] };
         const missingPrereqs = [];
-
         materia.prerequisitos.forEach(req => {
             if (Array.isArray(req)) {
-                const someMet = req.some(code => lockedCodes.has(code));
-                if (!someMet) {
-                    const names = req.map(code => {
-                        const found = dobleMaterias.find(m => m.codigo === code || (m.codigos_homologados && m.codigos_homologados.includes(code)));
-                        const codeLabel = found && found.codigos_homologados && found.codigos_homologados.length > 1 ? found.codigos_homologados.join(' / ') : code;
-                        return found ? `${found.nombre} (${codeLabel})` : code;
-                    }).join(' ó ');
-                    missingPrereqs.push(names);
+                if (!req.some(c => lockedCodes.has(c))) {
+                    missingPrereqs.push(req.map(getPrereqLabel).join(' ó '));
                 }
-            } else {
-                if (!lockedCodes.has(req)) {
-                    const found = dobleMaterias.find(m => m.codigo === req || (m.codigos_homologados && m.codigos_homologados.includes(req)));
-                    const codeLabel = found && found.codigos_homologados && found.codigos_homologados.length > 1 ? found.codigos_homologados.join(' / ') : req;
-                    missingPrereqs.push(found ? `${found.nombre} (${codeLabel})` : req);
-                }
+            } else if (!lockedCodes.has(req)) {
+                missingPrereqs.push(getPrereqLabel(req));
             }
         });
-
-        return {
-            isMet: missingPrereqs.length === 0,
-            missingPrereqs
-        };
+        return { isMet: missingPrereqs.length === 0, missingPrereqs };
     }
 
     // Comprobar exclusión mutua de optimización
     function isMutuallyExcluded(materia, lockedCodes) {
         if (materia.codigo === '033305') {
-            const opt2Materia = dobleMaterias.find(m => m.codigo === '033746');
-            if (opt2Materia && (opt2Materia.locked_in_semester || activeSelectedIds.has(opt2Materia.id))) {
+            const opt2 = dobleMaterias.find(m => m.codigo === '033746');
+            if (opt2 && (opt2.locked_in_semester || activeSelectedIds.has(opt2.id))) {
                 return { excluded: true, reason: 'Excluyente con Optimización lineal (033746)' };
             }
         }
         if (materia.codigo === '033746') {
-            const opt1Materia = dobleMaterias.find(m => m.codigo === '033305');
-            if (opt1Materia && (opt1Materia.locked_in_semester || activeSelectedIds.has(opt1Materia.id))) {
+            const opt1 = dobleMaterias.find(m => m.codigo === '033305');
+            if (opt1 && (opt1.locked_in_semester || activeSelectedIds.has(opt1.id))) {
                 return { excluded: true, reason: 'Excluyente con Temas de optimización (033305)' };
             }
         }
@@ -559,54 +447,25 @@ document.addEventListener('DOMContentLoaded', () => {
             cajitaCard.className = 'cajita-card';
             cajitaCard.dataset.semId = sem.semId;
 
-            const header = document.createElement('div');
-            header.className = 'cajita-card-header';
+            const chipsHtml = sem.materias.map(m => `
+                <div class="cajita-materia-chip chip-${m.origen || 'ambas'}">
+                    <span class="chip-name">${getMateriaName(m)}</span>
+                    <span class="chip-meta">${m.creditos}cr</span>
+                </div>
+            `).join('');
 
-            const titleGroup = document.createElement('div');
-            titleGroup.className = 'cajita-card-title-group';
+            cajitaCard.innerHTML = `
+                <div class="cajita-card-header">
+                    <div class="cajita-card-title-group">
+                        <h3>Semestre ${sem.semId}</h3>
+                        <span class="cajita-cr-badge">${sem.creditos} cr</span>
+                    </div>
+                    <button class="cajita-delete-btn" title="Eliminar Semestre ${sem.semId} y posteriores">Eliminar</button>
+                </div>
+                <div class="cajita-chips-container">${chipsHtml}</div>
+            `;
 
-            const semTitle = document.createElement('h3');
-            semTitle.textContent = `Semestre ${sem.semId}`;
-
-            const crBadge = document.createElement('span');
-            crBadge.className = 'cajita-cr-badge';
-            crBadge.textContent = `${sem.creditos} cr`;
-
-            titleGroup.appendChild(semTitle);
-            titleGroup.appendChild(crBadge);
-
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'cajita-delete-btn';
-            deleteBtn.innerHTML = 'Eliminar';
-            deleteBtn.title = `Eliminar Semestre ${sem.semId} y posteriores`;
-            deleteBtn.addEventListener('click', () => deleteDobleSemestersFrom(sem.semId));
-
-            header.appendChild(titleGroup);
-            header.appendChild(deleteBtn);
-            cajitaCard.appendChild(header);
-
-            const chipsContainer = document.createElement('div');
-            chipsContainer.className = 'cajita-chips-container';
-
-            sem.materias.forEach(m => {
-                const chip = document.createElement('div');
-                chip.className = `cajita-materia-chip chip-${m.origen || 'ambas'}`;
-
-                const chipName = document.createElement('span');
-                chipName.className = 'chip-name';
-                const vObj = m.variantes ? m.variantes.find(v => v.codigo === m.selected_variante) : null;
-                chipName.textContent = vObj ? vObj.nombre : m.nombre;
-
-                const chipMeta = document.createElement('span');
-                chipMeta.className = 'chip-meta';
-                chipMeta.textContent = `${m.creditos}cr`;
-
-                chip.appendChild(chipName);
-                chip.appendChild(chipMeta);
-                chipsContainer.appendChild(chip);
-            });
-
-            cajitaCard.appendChild(chipsContainer);
+            cajitaCard.querySelector('.cajita-delete-btn').onclick = () => deleteDobleSemestersFrom(sem.semId);
             cajitasList.appendChild(cajitaCard);
         });
     }
@@ -616,56 +475,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!activeCajitaTitle) return;
 
         activeCajitaTitle.textContent = `Cajita Semestre ${currentDobleSemester}`;
-        if (activeCajitaCreditsNum) {
-            activeCajitaCreditsNum.textContent = activeCajitaCredits;
-        }
-
-        if (finishCajitaSub) {
-            finishCajitaSub.textContent = `Cerrar Semestre ${currentDobleSemester}`;
-        }
-
-        if (finishCajitaBtn) {
-            finishCajitaBtn.disabled = activeSelectedIds.size === 0;
-        }
-        if (clearCajitaBtn) {
-            clearCajitaBtn.style.display = activeSelectedIds.size > 0 ? 'inline-block' : 'none';
-        }
+        if (activeCajitaCreditsNum) activeCajitaCreditsNum.textContent = activeCajitaCredits;
+        if (finishCajitaSub) finishCajitaSub.textContent = `Cerrar Semestre ${currentDobleSemester}`;
+        if (finishCajitaBtn) finishCajitaBtn.disabled = activeSelectedIds.size === 0;
+        if (clearCajitaBtn) clearCajitaBtn.style.display = activeSelectedIds.size > 0 ? 'inline-block' : 'none';
 
         if (activeCajitaMaterias) {
             activeCajitaMaterias.innerHTML = '';
 
             if (activeSelectedMaterias.length === 0) {
-                const emptyHint = document.createElement('div');
-                emptyHint.className = 'cajita-empty-hint';
-                emptyHint.innerHTML = '👉 Selecciona materias de la lista de <strong>Materias Disponibles</strong> abajo para agregarlas a este semestre.';
-                activeCajitaMaterias.appendChild(emptyHint);
+                activeCajitaMaterias.innerHTML = '<div class="cajita-empty-hint">👉 Selecciona materias de la lista de <strong>Materias Disponibles</strong> abajo para agregarlas a este semestre.</div>';
             } else {
                 activeSelectedMaterias.forEach(m => {
                     const chip = document.createElement('div');
                     chip.className = `active-chip chip-${m.origen || 'ambas'}`;
-
-                    const chipName = document.createElement('span');
-                    chipName.className = 'active-chip-name';
-                    const vObj = m.variantes ? m.variantes.find(v => v.codigo === m.selected_variante) : null;
-                    chipName.textContent = vObj ? vObj.nombre : m.nombre;
-
-                    const chipCr = document.createElement('span');
-                    chipCr.className = 'active-chip-cr';
-                    chipCr.textContent = `${m.creditos} cr`;
-
-                    const removeBtn = document.createElement('button');
-                    removeBtn.className = 'active-chip-remove';
-                    removeBtn.innerHTML = '×';
-                    removeBtn.title = 'Quitar de este semestre';
-                    removeBtn.addEventListener('click', (e) => {
+                    chip.innerHTML = `
+                        <span class="active-chip-name">${getMateriaName(m)}</span>
+                        <span class="active-chip-cr">${m.creditos} cr</span>
+                        <button class="active-chip-remove" title="Quitar de este semestre">×</button>
+                    `;
+                    chip.querySelector('.active-chip-remove').addEventListener('click', (e) => {
                         e.stopPropagation();
                         activeSelectedIds.delete(m.id);
                         renderDobleCarrera();
                     });
-
-                    chip.appendChild(chipName);
-                    chip.appendChild(chipCr);
-                    chip.appendChild(removeBtn);
                     activeCajitaMaterias.appendChild(chip);
                 });
             }
@@ -685,71 +518,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const query = currentSearchQuery.trim().toLowerCase();
 
         dobleMaterias.forEach(materia => {
-            if (materia.locked_in_semester) {
-                return;
-            }
-
-            if (currentPoolFilter !== 'all' && materia.origen !== currentPoolFilter) {
-                return;
-            }
+            if (materia.locked_in_semester) return;
+            if (currentPoolFilter !== 'all' && materia.origen !== currentPoolFilter) return;
 
             if (query) {
                 const matchName = materia.nombre.toLowerCase().includes(query);
                 const matchCode = materia.codigo && materia.codigo.toLowerCase().includes(query);
-                if (!matchName && !matchCode) {
-                    return;
-                }
+                if (!matchName && !matchCode) return;
             }
 
             const prereqStatus = checkPrerequisitesMet(materia, lockedCodes);
             const exclusionStatus = isMutuallyExcluded(materia, lockedCodes);
-
             const isAvailable = prereqStatus.isMet && !exclusionStatus.excluded;
 
             const card = document.createElement('div');
             card.className = 'pool-card';
 
             const isSelectedInActive = activeSelectedIds.has(materia.id);
+            const origenTag = materia.origen === 'cdat' ? 'Ciencia de Datos' : (materia.origen === 'matem' ? 'Matemáticas' : 'Compartida');
+            const codeLabel = materia.codigos_homologados?.length > 1
+                ? materia.codigos_homologados.join(' / ')
+                : (materia.codigo || '');
 
-            const crBadge = document.createElement('div');
-            crBadge.className = 'pool-card-cr';
-            crBadge.textContent = `${materia.creditos}cr`;
-            card.appendChild(crBadge);
+            card.innerHTML = `
+                <div class="pool-card-cr">${materia.creditos}cr</div>
+                <div class="pool-card-meta">
+                    <span class="origen-badge origen-${materia.origen || 'ambas'}">${origenTag}</span>
+                    ${codeLabel ? `<span class="pool-card-code">${codeLabel}</span>` : ''}
+                </div>
+                <div class="pool-card-title">${materia.nombre}</div>
+            `;
 
-            const topMeta = document.createElement('div');
-            topMeta.className = 'pool-card-meta';
-
-            const tagOrigen = document.createElement('span');
-            tagOrigen.className = `origen-badge origen-${materia.origen || 'ambas'}`;
-            tagOrigen.textContent = materia.origen === 'cdat' ? 'Ciencia de Datos' : (materia.origen === 'matem' ? 'Matemáticas' : 'Compartida');
-            topMeta.appendChild(tagOrigen);
-
-            if (materia.codigos_homologados && materia.codigos_homologados.length > 1) {
-                const codeBadge = document.createElement('span');
-                codeBadge.className = 'pool-card-code';
-                codeBadge.textContent = materia.codigos_homologados.join(' / ');
-                topMeta.appendChild(codeBadge);
-            } else if (materia.codigo) {
-                const codeBadge = document.createElement('span');
-                codeBadge.className = 'pool-card-code';
-                codeBadge.textContent = materia.codigo;
-                topMeta.appendChild(codeBadge);
-            }
-            card.appendChild(topMeta);
-
-            const nameEl = document.createElement('div');
-            nameEl.className = 'pool-card-title';
-            nameEl.textContent = materia.nombre;
-            card.appendChild(nameEl);
-
-            if (materia.variantes && materia.variantes.length > 1) {
+            if (materia.variantes?.length > 1) {
                 const variantContainer = document.createElement('div');
                 variantContainer.className = 'variant-selector';
 
                 materia.variantes.forEach(v => {
                     const btn = document.createElement('button');
                     btn.className = `variant-btn ${materia.selected_variante === v.codigo ? 'active' : ''}`;
-                    btn.textContent = `${v.nombre}`;
+                    btn.textContent = v.nombre;
                     btn.title = `Cursar como ${v.nombre} (${v.codigo})`;
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();

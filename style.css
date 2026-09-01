@@ -119,10 +119,6 @@ h1 {
     box-shadow: 0 0 0 3px rgba(223, 167, 93, 0.2), 0 6px 15px rgba(223, 167, 93, 0.25);
 }
 
-.semestre-title {
-    font-family: 'Outfit', sans-serif;
-}
-
 #pensum-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -148,6 +144,7 @@ h1 {
 }
 
 .semestre-title {
+    font-family: 'Outfit', sans-serif;
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
