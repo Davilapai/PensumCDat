@@ -1,0 +1,791 @@
+{
+  "Doble Carrera": [
+    {
+      "id": "CD_001295",
+      "nombre": "Cálculo Diferencial",
+      "codigo": "001295",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "nota": "Homologa Matemáticas 1 (032683)",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001297",
+      "nombre": "Cálculo Integral",
+      "codigo": "001297",
+      "creditos": "3",
+      "prerequisitos": [
+        "001295"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033698",
+      "nombre": "Introducción a la programación",
+      "codigo": "033698",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033699",
+      "nombre": "Programación avanzada",
+      "codigo": "033699",
+      "creditos": "3",
+      "prerequisitos": [
+        "033698"
+      ],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001290",
+      "nombre": "Álgebra lineal",
+      "codigo": "001290",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001299",
+      "nombre": "Cálculo vectorial",
+      "codigo": "001299",
+      "creditos": "3",
+      "prerequisitos": [
+        "001297"
+      ],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_030890",
+      "nombre": "Teoría de la probabilidad",
+      "codigo": "030890",
+      "creditos": "3",
+      "prerequisitos": [
+        [
+          "001299",
+          "001300"
+        ]
+      ],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033519",
+      "nombre": "Inferencia estadística",
+      "codigo": "033519",
+      "creditos": "3",
+      "prerequisitos": [
+        "030890"
+      ],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001505",
+      "nombre": "Constitución política",
+      "codigo": "001505",
+      "creditos": "2",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_TEO1",
+      "nombre": "Teología 1",
+      "codigo": null,
+      "creditos": "2",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_TEO2",
+      "nombre": "Teología 2",
+      "codigo": null,
+      "creditos": "2",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_FILO1",
+      "nombre": "Filosofía 1",
+      "codigo": null,
+      "creditos": "2",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_FILO2",
+      "nombre": "Filosofía 2",
+      "codigo": null,
+      "creditos": "2",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ENF1",
+      "nombre": "Énfasis 1",
+      "codigo": null,
+      "creditos": "4",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ENF2",
+      "nombre": "Énfasis 2",
+      "codigo": null,
+      "creditos": "4",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ENF3",
+      "nombre": "Énfasis 3",
+      "codigo": null,
+      "creditos": "4",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_COMP1",
+      "nombre": "Complementaria 1",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_COMP2",
+      "nombre": "Complementaria 2",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_COMP3",
+      "nombre": "Complementaria 3",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "ambas",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_CDAT_1",
+      "nombre": "Electiva 1 (Ciencia de Datos)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_CDAT_2",
+      "nombre": "Electiva 2 (Ciencia de Datos)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_CDAT_3",
+      "nombre": "Electiva 3 (Ciencia de Datos)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_CDAT_4",
+      "nombre": "Electiva 4 (Ciencia de Datos)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_MAT_1",
+      "nombre": "Electiva 1 (Matemáticas)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_MAT_2",
+      "nombre": "Electiva 2 (Matemáticas)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_MAT_3",
+      "nombre": "Electiva 3 (Matemáticas)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_MAT_4",
+      "nombre": "Electiva 4 (Matemáticas)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_ELEC_MAT_5",
+      "nombre": "Electiva 5 (Matemáticas)",
+      "codigo": null,
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001079",
+      "nombre": "Fundamentos de matemáticas 1",
+      "codigo": "001079",
+      "creditos": "4",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_008164",
+      "nombre": "Expresión oral y escrita",
+      "codigo": "008164",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_015818",
+      "nombre": "Fundamentos de matemáticas 2",
+      "codigo": "015818",
+      "creditos": "4",
+      "prerequisitos": [
+        "001079"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_017606",
+      "nombre": "Álgebra lineal 2",
+      "codigo": "017606",
+      "creditos": "4",
+      "prerequisitos": [
+        "015818",
+        "001290"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001300",
+      "nombre": "Ecuaciones diferenciales",
+      "codigo": "001300",
+      "creditos": "3",
+      "prerequisitos": [
+        "001297",
+        "001290"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001340",
+      "nombre": "Física mecánica",
+      "codigo": "001340",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001074",
+      "nombre": "Análisis matemático 1",
+      "codigo": "001074",
+      "creditos": "4",
+      "prerequisitos": [
+        "001297",
+        "015818"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001200",
+      "nombre": "Álgebra abstracta 1",
+      "codigo": "001200",
+      "creditos": "4",
+      "prerequisitos": [
+        "017606"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001339",
+      "nombre": "Electricidad y magnetismo",
+      "codigo": "001339",
+      "creditos": "3",
+      "prerequisitos": [
+        "001340",
+        "001297"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001075",
+      "nombre": "Análisis matemático 2",
+      "codigo": "001075",
+      "creditos": "4",
+      "prerequisitos": [
+        "001074",
+        "001290"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_037349",
+      "nombre": "Álgebra abstracta 2",
+      "codigo": "037349",
+      "creditos": "4",
+      "prerequisitos": [
+        "001200"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001077",
+      "nombre": "Geometría diferencial",
+      "codigo": "001077",
+      "creditos": "4",
+      "prerequisitos": [
+        "001074",
+        "001290"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_024093",
+      "nombre": "Análisis complejo",
+      "codigo": "024093",
+      "creditos": "4",
+      "prerequisitos": [
+        "001074"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001205",
+      "nombre": "Topología",
+      "codigo": "001205",
+      "creditos": "4",
+      "prerequisitos": [
+        "001074"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001291",
+      "nombre": "Análisis numérico",
+      "codigo": "001291",
+      "creditos": "3",
+      "prerequisitos": [
+        "001300"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_037350",
+      "nombre": "Iniciación científica",
+      "codigo": "037350",
+      "creditos": "4",
+      "prerequisitos": [
+        "001205"
+      ],
+      "origen": "matem",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001449",
+      "nombre": "Principios de economía",
+      "codigo": "001449",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033518",
+      "nombre": "Lógica y matemáticas discretas",
+      "codigo": "033518",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033514",
+      "nombre": "Introducción a la ciencia de datos",
+      "codigo": "033514",
+      "creditos": "2",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_015962",
+      "nombre": "Microeconomía",
+      "codigo": "015962",
+      "creditos": "3",
+      "prerequisitos": [
+        "001449",
+        "001295"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033515",
+      "nombre": "Curaduría y gobernanza de datos",
+      "codigo": "033515",
+      "creditos": "2",
+      "prerequisitos": [
+        "033514"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001432",
+      "nombre": "Macroeconomía",
+      "codigo": "001432",
+      "creditos": "3",
+      "prerequisitos": [
+        "015962"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_004196",
+      "nombre": "Estructura de datos",
+      "codigo": "004196",
+      "creditos": "3",
+      "prerequisitos": [
+        "033518",
+        "033699"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033700",
+      "nombre": "Bases de datos",
+      "codigo": "033700",
+      "creditos": "4",
+      "prerequisitos": [
+        "033518",
+        "033699"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033704",
+      "nombre": "Visualización de datos",
+      "codigo": "033704",
+      "creditos": "3",
+      "prerequisitos": [
+        "033514",
+        "033698"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033701",
+      "nombre": "Principios de desarrollo de software",
+      "codigo": "033701",
+      "creditos": "3",
+      "prerequisitos": [
+        "033700"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_004084",
+      "nombre": "Introducción a IA",
+      "codigo": "004084",
+      "creditos": "3",
+      "prerequisitos": [
+        "004196"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001377",
+      "nombre": "Administración",
+      "codigo": "001377",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033520",
+      "nombre": "Análisis de regresión",
+      "codigo": "033520",
+      "creditos": "3",
+      "prerequisitos": [
+        "033519"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033762",
+      "nombre": "Gestión de proyectos",
+      "codigo": "033762",
+      "creditos": "2",
+      "prerequisitos": [
+        "001432"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033702",
+      "nombre": "Procesamiento de datos a gran escala",
+      "codigo": "033702",
+      "creditos": "3",
+      "prerequisitos": [
+        "033700"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033773",
+      "nombre": "Fundamentos de ML",
+      "codigo": "033773",
+      "creditos": "3",
+      "prerequisitos": [
+        "004084",
+        "033519"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_001382",
+      "nombre": "Organizaciones",
+      "codigo": "001382",
+      "creditos": "3",
+      "prerequisitos": [
+        "001377"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_034912",
+      "nombre": "Legislación de datos",
+      "codigo": "034912",
+      "creditos": "3",
+      "prerequisitos": [],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033521",
+      "nombre": "Análisis multivariado",
+      "codigo": "033521",
+      "creditos": "3",
+      "prerequisitos": [
+        "033519"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033703",
+      "nombre": "Técnicas de ML",
+      "codigo": "033703",
+      "creditos": "3",
+      "prerequisitos": [
+        "004084",
+        "033519"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033573",
+      "nombre": "Introducción a narrativa de datos",
+      "codigo": "033573",
+      "creditos": "3",
+      "prerequisitos": [
+        "033704"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033523",
+      "nombre": "Seminario trabajo de grado",
+      "codigo": "033523",
+      "creditos": "3",
+      "prerequisitos": [
+        "033521",
+        "033703"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033305",
+      "nombre": "Temas de optimización lineal",
+      "codigo": "033305",
+      "creditos": "3",
+      "prerequisitos": [
+        "001290",
+        "033699"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033746",
+      "nombre": "Optimización lineal",
+      "codigo": "033746",
+      "creditos": "3",
+      "prerequisitos": [
+        "001290",
+        "001295",
+        "033698"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    },
+    {
+      "id": "CD_033522",
+      "nombre": "Trabajo de grado",
+      "codigo": "033522",
+      "creditos": "6",
+      "prerequisitos": [
+        "033523",
+        "034912"
+      ],
+      "origen": "cdat",
+      "status_checked": false,
+      "locked_in_semester": false
+    }
+  ]
+}

@@ -348,3 +348,689 @@ h1 {
     z-index: 10;
 }
 
+/* =========================================================
+   ESTILOS PARA DOBLE CARRERA (CAJITAS Y BOLSA DE MATERIAS)
+   ========================================================= */
+
+.materias-summary {
+    color: #94a3b8;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.doble-carrera-container {
+    margin-top: 10px;
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--accent-color);
+    font-size: 1.5em;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+}
+
+.section-subtitle {
+    color: #94a3b8;
+    font-size: 0.95em;
+    margin: 0;
+}
+
+/* --- Lista de Cajitas Terminadas --- */
+.cajitas-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.cajita-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(223, 167, 93, 0.4);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cajita-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    border-color: var(--accent-color);
+}
+
+.cajita-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 10px;
+}
+
+.cajita-card-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cajita-card-title-group h3 {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    color: #f1f5f9;
+    font-size: 1.15em;
+    font-weight: 700;
+}
+
+.cajita-cr-badge {
+    background: rgba(223, 167, 93, 0.18);
+    color: var(--accent-color);
+    border: 1px solid rgba(223, 167, 93, 0.4);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+.cajita-delete-btn {
+    background-color: transparent;
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.8em;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.cajita-delete-btn:hover {
+    background-color: #ef4444;
+    color: #fff;
+    border-color: #ef4444;
+}
+
+.cajita-chips-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cajita-materia-chip {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid #64748b;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88em;
+}
+
+.cajita-materia-chip.chip-cdat {
+    border-left-color: #38bdf8;
+}
+
+.cajita-materia-chip.chip-matem {
+    border-left-color: #a855f7;
+}
+
+.cajita-materia-chip.chip-ambas {
+    border-left-color: var(--accent-color);
+}
+
+.chip-name {
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.chip-meta {
+    font-size: 0.8em;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+/* --- Cajita Activa en Construcción --- */
+.active-cajita-container {
+    margin-bottom: 35px;
+}
+
+.active-cajita-card {
+    background: linear-gradient(145deg, #1b282e, #162227);
+    border: 2px dashed var(--accent-color);
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.active-cajita-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(223, 167, 93, 0.2);
+    padding-bottom: 12px;
+}
+
+.cajita-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cajita-tag {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    font-size: 0.75em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.active-cajita-header h3 {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    color: #fff;
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.active-cajita-credits {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--accent-color);
+    background: rgba(223, 167, 93, 0.1);
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(223, 167, 93, 0.3);
+}
+
+.active-cajita-materias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 50px;
+    align-items: center;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.cajita-empty-hint {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 0.95em;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.cajita-empty-hint strong {
+    color: var(--accent-color);
+}
+
+.active-chip {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeInScale 0.25s ease forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.active-chip.chip-cdat {
+    border-left-color: #38bdf8;
+}
+
+.active-chip.chip-matem {
+    border-left-color: #a855f7;
+}
+
+.active-chip.chip-ambas {
+    border-left-color: var(--accent-color);
+}
+
+.active-chip-name {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #f1f5f9;
+}
+
+.active-chip-cr {
+    font-size: 0.78em;
+    background: rgba(223, 167, 93, 0.2);
+    color: var(--accent-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.active-chip-remove {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.2em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 2px;
+    transition: color 0.2s ease;
+}
+
+.active-chip-remove:hover {
+    color: #ef4444;
+}
+
+.active-cajita-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.finish-cajita-btn {
+    background: linear-gradient(135deg, #dfa75d 0%, #c99349 100%);
+    color: #121f24;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.05em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(223, 167, 93, 0.35);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.finish-cajita-btn small {
+    font-size: 0.75em;
+    font-weight: 600;
+    opacity: 0.85;
+    margin-top: 2px;
+}
+
+.finish-cajita-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(223, 167, 93, 0.5);
+    background: linear-gradient(135deg, #f5bc73 0%, #dfa75d 100%);
+}
+
+.finish-cajita-btn:disabled {
+    background: #2a3a40;
+    color: #64748b;
+    box-shadow: none;
+    cursor: not-allowed;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.clear-cajita-btn {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.clear-cajita-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f1f5f9;
+}
+
+/* --- Sección de Bolsa de Materias (Pool) --- */
+.pool-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid rgba(223, 167, 93, 0.2);
+}
+
+.pool-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 280px;
+}
+
+.search-box input {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--card-bg);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 0.95em;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.search-box input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(223, 167, 93, 0.15);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.filter-btn.active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+    font-weight: 700;
+}
+
+/* --- Columnas Disponibles y No Disponibles --- */
+.pool-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 900px) {
+    .pool-columns {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.pool-column {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.pool-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid;
+    margin-bottom: 8px;
+}
+
+.disponibles-header {
+    border-bottom-color: #10b981;
+}
+
+.bloqueadas-header {
+    border-bottom-color: #475569;
+}
+
+.pool-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pool-header-title h3 {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25em;
+    color: #f1f5f9;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.available-indicator {
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.locked-indicator {
+    background: #64748b;
+}
+
+.count-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+}
+
+.available-badge {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.locked-badge {
+    background: rgba(100, 116, 139, 0.15);
+    color: #94a3b8;
+    border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.column-desc {
+    font-size: 0.85em;
+    color: #94a3b8;
+    margin: 0 0 16px 0;
+}
+
+.materia-pool-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    flex: 1;
+    align-content: start;
+}
+
+/* --- Tarjetas del Pool --- */
+.pool-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 14px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.pool-card-cr {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    font-size: 0.75em;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.pool-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75em;
+}
+
+.origen-badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.72em;
+    text-transform: uppercase;
+}
+
+.origen-cdat {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+}
+
+.origen-matem {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+}
+
+.origen-ambas {
+    background: rgba(223, 167, 93, 0.15);
+    color: var(--accent-color);
+}
+
+.pool-card-code {
+    color: #94a3b8;
+    font-family: monospace;
+    font-size: 0.85em;
+}
+
+.pool-card-title {
+    font-weight: 600;
+    font-size: 0.92em;
+    color: #f1f5f9;
+    line-height: 1.3;
+}
+
+/* Tarjeta Disponible */
+.pool-card-available {
+    border-left: 4px solid #10b981;
+    cursor: pointer;
+}
+
+.pool-card-available:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    border-color: #10b981;
+}
+
+.pool-card-available.selected {
+    background: #064e3b;
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px #10b981, 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+.pool-card-available.selected .pool-card-title {
+    color: #fff;
+}
+
+.selected-indicator {
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #34d399;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* Tarjeta Bloqueada */
+.pool-card-locked {
+    background: #111a1e;
+    border-color: rgba(255, 255, 255, 0.04);
+    opacity: 0.85;
+}
+
+.pool-card-locked .pool-card-title {
+    color: #94a3b8;
+}
+
+.pool-card-locked .pool-card-cr {
+    background: #475569;
+    color: #cbd5e1;
+}
+
+.pool-locked-info {
+    margin-top: 4px;
+    font-size: 0.78em;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 6px 8px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.locked-reason-header {
+    color: #f87171;
+    font-weight: 600;
+}
+
+.missing-prereq-item {
+    color: #cbd5e1;
+    line-height: 1.25;
+}
+
+.excl-item {
+    color: #fbbf24;
+    font-weight: 600;
+}
+
+.pool-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #64748b;
+    font-style: italic;
+    padding: 30px 10px;
+}
+
+

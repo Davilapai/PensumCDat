@@ -16,18 +16,105 @@
                     <select id="career-select" class="career-dropdown">
                         <option value="cdat.json">Ciencia de Datos</option>
                         <option value="matem.json">Matemáticas</option>
+                        <option value="doble.json">Doble Carrera (CDAT + Matemáticas)</option>
                     </select>
                 </div>
             </div>
         </div>
         <div id="global-credits" class="global-credits">
-            Créditos cursados: <span id="credits-count">0</span> / <span id="total-credits-count">0</span>
+            Créditos cursados / planeados: <span id="credits-count">0</span> / <span id="total-credits-count">0</span>
+            <span id="materias-summary" class="materias-summary" style="display: none;"> • Materias: <span id="materias-checked-count">0</span> / <span id="materias-total-count">0</span></span>
         </div>
+
+        <!-- Vista Tradicional por Semestres (Para carreras individuales) -->
         <div id="pensum-container"></div>
         
-        <div class="planner-section">
+        <div id="planner-section" class="planner-section">
             <button id="add-semester-btn" class="planner-btn">Agregar semestre</button>
             <div id="semesters-list"></div>
+        </div>
+
+        <!-- Vista de Cajitas y Bolsa de Materias (Para Doble Carrera) -->
+        <div id="doble-carrera-container" class="doble-carrera-container" style="display: none;">
+            <!-- Sección Superior: Plan de Estudios en Cajitas -->
+            <div class="cajitas-section">
+                <div class="section-header">
+                    <h2>Plan de Estudios (Cajitas de Semestres)</h2>
+                    <p class="section-subtitle">Construye tu plan semestre por semestre seleccionando las materias disponibles abajo.</p>
+                </div>
+
+                <div id="cajitas-list" class="cajitas-list"></div>
+
+                <!-- Cajita Activa en Construcción -->
+                <div id="active-cajita-container" class="active-cajita-container">
+                    <div class="active-cajita-card">
+                        <div class="active-cajita-header">
+                            <div class="cajita-title-group">
+                                <span class="cajita-tag">En Selección</span>
+                                <h3 id="active-cajita-title">Cajita Semestre 1</h3>
+                            </div>
+                            <div class="active-cajita-credits">
+                                <span id="active-cajita-credits-num">0</span> cr seleccionados
+                            </div>
+                        </div>
+
+                        <div id="active-cajita-materias" class="active-cajita-materias">
+                            <div class="cajita-empty-hint">Selecciona materias de la lista de "Materias Disponibles" abajo para agregarlas a este semestre.</div>
+                        </div>
+
+                        <div class="active-cajita-actions">
+                            <button id="finish-cajita-btn" class="finish-cajita-btn" disabled>
+                                <span>Finalizar Cajita</span>
+                                <small id="finish-cajita-sub">Cerrar Semestre 1</small>
+                            </button>
+                            <button id="clear-cajita-btn" class="clear-cajita-btn" style="display: none;">Limpiar selección</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Inferior: Bolsa de Materias Disponibles y No Disponibles -->
+            <div class="pool-section">
+                <div class="pool-controls">
+                    <div class="search-box">
+                        <input type="text" id="materia-search-input" placeholder="🔍 Buscar materia por nombre o código..." autocomplete="off">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Todas</button>
+                        <button class="filter-btn" data-filter="cdat">Solo CDAT</button>
+                        <button class="filter-btn" data-filter="matem">Solo Matemáticas</button>
+                        <button class="filter-btn" data-filter="ambas">Compartidas</button>
+                    </div>
+                </div>
+
+                <div class="pool-columns">
+                    <!-- Columna de Materias Disponibles -->
+                    <div class="pool-column disponibles-column">
+                        <div class="pool-column-header disponibles-header">
+                            <div class="pool-header-title">
+                                <span class="status-indicator available-indicator"></span>
+                                <h3>Materias Disponibles</h3>
+                            </div>
+                            <span id="disponibles-badge" class="count-badge available-badge">0</span>
+                        </div>
+                        <p class="column-desc">Prerequisitos cumplidos. Haz clic para añadir a la cajita actual.</p>
+                        <div id="disponibles-list" class="materia-pool-list"></div>
+                    </div>
+
+                    <!-- Columna de Materias No Disponibles -->
+                    <div class="pool-column bloqueadas-column">
+                        <div class="pool-column-header bloqueadas-header">
+                            <div class="pool-header-title">
+                                <span class="status-indicator locked-indicator"></span>
+                                <h3>Materias No Disponibles</h3>
+                            </div>
+                            <span id="bloqueadas-badge" class="count-badge locked-badge">0</span>
+                        </div>
+                        <p class="column-desc">Tienen prerequisitos pendientes que debes cursar en semestres previos.</p>
+                        <div id="bloqueadas-list" class="materia-pool-list"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

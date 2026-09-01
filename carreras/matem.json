@@ -22,7 +22,7 @@
       "creditos": "3"
     },
     {
-      "nombre": "Teología",
+      "nombre": "Teología 1",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
@@ -59,7 +59,7 @@
       "creditos": "3"
     },
     {
-      "nombre": "Filosofía",
+      "nombre": "Filosofía 1",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
@@ -103,7 +103,7 @@
       "creditos": "3"
     },
     {
-      "nombre": "Electiva",
+      "nombre": "Electiva 1",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
@@ -170,7 +170,7 @@
       "creditos": "4"
     },
     {
-      "nombre": "Electiva",
+      "nombre": "Electiva 2",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
@@ -214,7 +214,7 @@
       "creditos": "3"
     },
     {
-      "nombre": "Electiva",
+      "nombre": "Electiva 3",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
@@ -251,7 +251,7 @@
       "creditos": "3"
     },
     {
-      "nombre": "Electiva",
+      "nombre": "Electiva 4",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
@@ -281,7 +281,7 @@
       "creditos": "3"
     },
     {
-      "nombre": "Electiva",
+      "nombre": "Electiva 5",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,

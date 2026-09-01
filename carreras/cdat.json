@@ -279,14 +279,14 @@
       "creditos": "3"
     },
     {
-      "nombre": "Complementaria",
+      "nombre": "Complementaria 1",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
       "creditos": "3"
     },
     {
-      "nombre": "Complementaria",
+      "nombre": "Complementaria 2",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
@@ -316,7 +316,7 @@
       "creditos": "6"
     },
     {
-      "nombre": "Complementaria",
+      "nombre": "Complementaria 3",
       "codigo": null,
       "prerequisitos": [],
       "status_checked": false,
