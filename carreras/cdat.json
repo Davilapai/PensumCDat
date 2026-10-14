@@ -277,7 +277,7 @@
     {
       "nombre": "Análisis Multivariado",
       "codigo": "033521",
-      "prerequisitos": ["033519"],
+      "prerequisitos": ["033520"],
       "status_checked": false,
       "creditos": "3",
       "linea": "matematicas"

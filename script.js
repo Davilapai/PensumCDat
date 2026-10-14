@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     : 'PRE: No tiene';
 
                 card.innerHTML = `
-                    ${materia.creditos ? `<div class="materia-creditos">${materia.creditos} cr</div>` : ''}
+                    ${materia.creditos ? `<div class="materia-creditos">${materia.creditos}</div>` : ''}
                     <div class="materia-name">${materia.nombre}</div>
                     <div class="materia-code">${materia.codigo ? 'ID ' + materia.codigo : ''}</div>
                     <div class="materia-prereqs">${formattedPrereqs}</div>
